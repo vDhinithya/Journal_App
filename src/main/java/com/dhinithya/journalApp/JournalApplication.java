@@ -202,6 +202,10 @@ Maven :- is a build automation tool which helps in creating api and manages depe
 		  level:
 		    root:  ERROR   to set whole error off
 
+	EXTERNAL API INTEGRATION
+	   using rest templates to hit apis
+
+
  */
 
 package com.dhinithya.journalApp;
@@ -213,6 +217,7 @@ import org.springframework.data.mongodb.MongoDatabaseFactory;
 import org.springframework.data.mongodb.MongoTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
 @EnableTransactionManagement
@@ -226,6 +231,11 @@ public class JournalApplication {
 	@Bean
 	public PlatformTransactionManager add(MongoDatabaseFactory dbFactory){
 		return new MongoTransactionManager(dbFactory);
+	}
+
+	@Bean
+	public RestTemplate restTemplate(){
+		return new RestTemplate();
 	}
 
 }
