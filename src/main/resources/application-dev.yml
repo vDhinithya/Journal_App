@@ -18,3 +18,9 @@ server:
 #    com:
 #      dhinithya:
 #        journalApp: DEBUG
+
+weather:
+  api:
+    key: b5ca7f37fbd0da973df8638c66bf1efc
+# can be used like this
+# weather_api_key: b5ca7f37fbd0da973df8638c66bf1efc
