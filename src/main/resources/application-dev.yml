@@ -7,6 +7,18 @@ spring:
 
   main:
     allow-circular-references: true
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: vdhinithya@gmail.com
+    password: wouichdqkkqhzfzj
+
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
 
 server:
   port: 8080
