@@ -1,8 +1,9 @@
 spring:
-  redis:
-    host: localhost
-    port: 6379
   data:
+    redis:
+      uri:redis://default:4ihokwMYvnbVJRIkvGpDaKvHsH6gGhfh@redis-15575.c264.ap-south-1-1.ec2.redns.redis-cloud.com:15575
+    #    host: localhost
+    #    port: 6379
     mongodb:
       uri: mongodb+srv://vdhinithya:HLNdVq4NJNzM6Udc@cluster0.3cbzl.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
       database: journaldb
