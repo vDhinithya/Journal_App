@@ -24,5 +24,6 @@ public class JournalEntry {   // this is POJO ( Plain Old Java Object)
 
     private LocalDateTime date;
 
+    private Sentiment sentiment;
 }
 
