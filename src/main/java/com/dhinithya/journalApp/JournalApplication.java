@@ -205,6 +205,10 @@ Maven :- is a build automation tool which helps in creating api and manages depe
 	EXTERNAL API INTEGRATION
 	   using rest templates to hit apis
 
+    REDIS it is mainly used for inmemory cache(main memory) earlier used JVM's cache but it need jvm to run first indirectly means to run the SB application
+    to configure this, use dependency then add yml/prop
+    it uses serialization and deserialization thats why when we fetch the data which is set at redis cli will not be found in the application
+    for that make sure the serializer and deserializer of redis and SB are same
 
  */
 
