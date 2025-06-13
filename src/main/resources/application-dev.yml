@@ -1,3 +1,20 @@
+weather:
+  api:
+    key: b5ca7f37fbd0da973df8638c66bf1efc
+# can be used like this
+# weather_api_key: b5ca7f37fbd0da973df8638c66bf1efc
+
+server:
+  port: 8080
+#  servlet:
+#    context-path: // now this has to be there after http://localhost:8080, like http://localhost:8080/journal/api/jobs
+
+#logging:
+#  level:
+#    com:
+#      dhinithya:
+#        journalApp: DEBUG
+
 spring:
   data:
     redis:
@@ -23,20 +40,28 @@ spring:
           auth: true
           starttls:
             enable: true
+  kafka:
+    bootstrap-servers: pkc-9q8rv.ap-south-2.aws.confluent.cloud:9892
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.JsonSerializer
+    consumer:
+      group-id: journal-consumer-group
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.JsonDeserializer
+      properties:
+        spring:
+          json:
+            trusted:
+              packages: com.dhinithya.journalApp.model
+    properties:
+      security:
+        protocol: SASL_SSL
+      sasl:
+        mechanism: PLAIN
+        jaas:
+          config: org.apache.kafka.common.security.plain.PlainLoginModule required username='RUSTNFAHM54DJZBD' password='t59a3STcCa45QJx8UzNGPtt0BYFfw5y6mYIvJ6nEyYfUksIz9d1ValH/prntkbH8';
+      session:
+        timeout:
+          ms: 45000
 
-server:
-  port: 8080
-#  servlet:
-#    context-path: // now this has to be there after http://localhost:8080, like http://localhost:8080/journal/api/jobs
-
-#logging:
-#  level:
-#    com:
-#      dhinithya:
-#        journalApp: DEBUG
-
-weather:
-  api:
-    key: b5ca7f37fbd0da973df8638c66bf1efc
-# can be used like this
-# weather_api_key: b5ca7f37fbd0da973df8638c66bf1efc

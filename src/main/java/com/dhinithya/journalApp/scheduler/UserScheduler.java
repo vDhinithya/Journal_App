@@ -6,9 +6,11 @@ import com.dhinithya.journalApp.cache.AppCache;
 import com.dhinithya.journalApp.entity.JournalEntry;
 import com.dhinithya.journalApp.entity.Sentiment;
 import com.dhinithya.journalApp.entity.User;
+import com.dhinithya.journalApp.model.SentimentData;
 import com.dhinithya.journalApp.service.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.aggregation.ArrayOperators;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -34,6 +36,9 @@ public class UserScheduler {
     @Autowired
     private AppCache appCache;
 
+    @Autowired
+    private KafkaTemplate<String, SentimentData> kafkaTemplate;
+
     @Scheduled(cron = "0 0 9 * * SUN")
     public void fetchUsersAndSendSaMail(){
         List<User> users = userRepository.getUserForSA();
@@ -53,7 +58,9 @@ public class UserScheduler {
                 mostFrequentSentiment = entry.getKey();
             }
             if(mostFrequentSentiment != null){
-                emailService.sendEmail(user.getEmail(), "Sentiments for last 7 days ", mostFrequentSentiment.toString());
+                //emailService.sendEmail(user.getEmail(), "Sentiments for last 7 days ", mostFrequentSentiment.toString());
+                SentimentData sentimentData = SentimentData.builder().email(user.getEmail()).sentiment("Sentiment for last 7 days " + mostFrequentSentiment).build();
+                kafkaTemplate.send("weekly-sentiments", sentimentData.getEmail(), sentimentData);
             }
 
 //            String entry = String.join(" ",filteredEntries) ;
